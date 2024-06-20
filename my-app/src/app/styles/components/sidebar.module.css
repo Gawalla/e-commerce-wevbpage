@@ -1,0 +1,52 @@
+.sidebar_inner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: rgba(51, 51, 51, 0.9);
+    color: #fff;
+    overflow-x: hidden;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* To give a mirror effect */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5); /* Optional shadow */
+  }
+  
+  .sidebar_inner ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 50px; /* To avoid overlap with close icon */
+  }
+  
+  .sidebar_inner li {
+    padding: 10px 20px;
+  }
+  
+  .sidebar_inner a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .sidebar_inner .icon {
+    margin-right: 10px;
+  }
+  
+  .sidebar_inner .text {
+    vertical-align: middle;
+  }
+  
+  /* Show the sidebar when it has the 'show' class */
+  .sidebar_inner.show {
+    transform: translateX(0);
+  }
+  
+  .close_icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+  }

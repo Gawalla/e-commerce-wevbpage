@@ -15,15 +15,13 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  padding: 0%;
+  margin: 0%;
+  color: white;
+  height: auto;                 
+  overflow-x: hidden;                  
+  background: linear-gradient(90deg, #ff66c4, #ffde59);
 }
 
 @layer utilities {
