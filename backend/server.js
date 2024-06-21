@@ -16,7 +16,6 @@ app.use('/user', router)
 app.listen(port,()=>{
 console.log('server connected')
 })
-console.log(typeof mongodbUri)
     mongoose.connect(mongodbUri).then(()=>{
         console.log('db connected')
     }).catch(err=>{

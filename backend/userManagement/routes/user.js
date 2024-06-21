@@ -10,11 +10,10 @@ router.post("/signup", UserController.signup);
 router.post("/login", UserController.login);
 
 // post api/createProfile
-router.post("/createProfile", UserController.createProfile);
+router.post("/createProfile/:userid", UserController.createProfile);
 
 // GET http://localhost:3000/user/profile/667440a581ef78d709491877
 router.get("/profile/:userid", UserController.getProfile);
-
 
 // PUT /api/pofile
 router.put("/profile/:userid", UserController.updateProfile);

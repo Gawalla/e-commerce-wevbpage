@@ -18,6 +18,8 @@ const signSchema = mongoose.Schema({
   },
   PhoneNumber: {
     type: Number,
+    required: true,
+
   },
 },{ _id: false });
 const profileModels = mongoose.model("userProfile", signSchema);

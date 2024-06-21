@@ -1,6 +1,7 @@
 import signupModels from "../models/signup.js";
 import profileModels from "../models/profile.js";
-import mongoose from "mongoose";
+import { createjwt } from "../../acess/userJwt.js";
+
 const UserController = {
   async signup(req, res) {
     const data = req.body;
@@ -11,12 +12,13 @@ const UserController = {
     };
     try {
       const userData = await signupModels.create(dataCont);
-      console.log(userData);
+      const jwt_token = createjwt({ userId: userData._id});
       res
         .send({
-          id: userData.id,
+          id: userData._id,
           username: userData.username,
           email: userData.email,
+          access_token: jwt_token,
         })
         .status(200);
     } catch (err) {
@@ -50,16 +52,15 @@ const UserController = {
   },
   async createProfile(req, res) {
     const data = req.body;
-    const headid = req.headers["id"];
+    const useid = req.params.userid;
     const dataCont = {
-      _id: headid,
+      _id: useid,
       fullName: data.fullName,
       D_O_B: new Date(req.body.dob),
-      phoneNumber: data.phoneNumber,
+      PhoneNumber: new Number(data.phoneNumber),
     };
     try {
       const userData = await profileModels.create(dataCont);
-      console.log(userData);
       res
         .send({
           id: userData.id,
@@ -75,7 +76,7 @@ const UserController = {
   async getProfile(req, res) {
     const userid = req.params.userid;
     try {
-      const userProfile= await profileModels.findById(userid)
+      const userProfile = await profileModels.findById(userid);
       if (userProfile === null) {
         res.send({ msg: "userProfile could not found" });
       } else {
@@ -83,15 +84,39 @@ const UserController = {
       }
     } catch (err) {
       console.log("error while fetching the user profile " + err);
-        res.send({
-          msg: "internal server error while fetching your profile data",
-        });
+      res.send({
+        msg: "internal server error while fetching your profile data",
+      });
     }
-      
   },
 
   async updateProfile(req, res) {
     // Implement update profile logic
+    const data = req.body;
+    const userid = req.params.userid;
+    const dataCont = {
+      _id: userid,
+      fullName: data.fullName,
+      D_O_B: new Date(req.body.dob),
+      phoneNumber: new Number(data.phoneNumber),
+    };
+    try {
+      const updatedData = await profileModels.findByIdAndUpdate(
+        userid,
+        dataCont,
+        { new: true, runValidators: true }
+      );
+      res
+        .send({
+          id: updatedData.id,
+          fullName: updatedData.fullName,
+          phoneNumber: updatedData.PhoneNumber,
+          DOB: updatedData.D_O_B,
+        })
+        .status(200);
+    } catch (err) {
+      console.log(err + " while sending data from cont to models");
+    }
   },
 
   async logout(req, res) {
