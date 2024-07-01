@@ -15,7 +15,6 @@
     "render-build":"npm install && cd my-app && npm run build",
     "start": "node server/server.js",
 "develop": "concurrently \"cd backend && npm run start\" \"cd my-app && npm run start\"",
-"install": "cd backend && npm i && cd ./backend && npm i --production=false",
 "render-build":"npm install && npm run build"
   },
   "name": "e-commerce",
