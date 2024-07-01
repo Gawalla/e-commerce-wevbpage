@@ -6,9 +6,9 @@ Creating an e-commerce API involves providing a set of endpoints that allow user
 2. **User Login** $$
    - Endpoint for user authentication and generating tokens.
 3. **User Profile** $$
-   - Endpoints to retrieve and update user profile information.
+   - Endpoints to retrieve and update user profile information. $$
 4. **Password Management**
-   - Endpoints for password reset and change.
+   {{- Endpoints for password reset and change. }}
 
 ### Product Management
 5. **Product Catalog**

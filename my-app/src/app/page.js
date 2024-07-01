@@ -1,5 +1,6 @@
 'use client'
 import React from "react";
+import {app} from './firebase.js'
 import "./globals.css";
 import styles2 from "./styles/home.module.css";
 import Image from "next/image";

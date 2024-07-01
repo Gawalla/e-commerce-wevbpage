@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import router  from './userManagement/routes/user.js'
 import mongoose from 'mongoose';
+
 dotenv.config()
 const port = process.env.PORT || 3000;
 const mongodbUri = process.env.MONGODB_URI;

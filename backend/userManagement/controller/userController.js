@@ -1,7 +1,6 @@
 import signupModels from "../models/signup.js";
 import profileModels from "../models/profile.js";
 import { createjwt } from "../../acess/userJwt.js";
-
 const UserController = {
   async signup(req, res) {
     const data = req.body;
@@ -9,10 +8,12 @@ const UserController = {
       username: data.username,
       email: data.email,
       password: data.password,
+      userType:data.usertype
     };
     try {
       const userData = await signupModels.create(dataCont);
-      const jwt_token = createjwt({ userId: userData._id});
+      const jwt_token = createjwt({ userId: userData.email, date: Date.now() });
+
       res
         .send({
           id: userData._id,
@@ -39,10 +40,13 @@ const UserController = {
         if (data == null) {
           res.send({ msg: "user could not found" });
         } else {
+          const jwt_token = createjwt({ userId: userData.email,date:Date.now()});
           res.send({
             msg: "welcome again",
             username: data.username,
             email: data.email,
+            access_token: jwt_token,
+
           });
         }
       })
@@ -119,9 +123,9 @@ const UserController = {
     }
   },
 
-  async logout(req, res) {
-    // Implement logout logic
-  },
+  // async logout(req, res) {
+  //   // Implement logout logic
+  // },
 };
 
 export default UserController;
